@@ -8,12 +8,14 @@ class App < Sinatra::Base
   end
 
   get '/square/:number' do
-    @number = params[:number].to_i.square.to_s
-    "#{@number}"
+    @number = params[:number]
+    "#{@number.to_i * @number.to_i}"
   end
 
   get '/say/:number/:phrase' do
-    (params[:number] + params[:phrase]).count
+    @number = params[:number] 
+    @phrase = params[:phrase]
+    "#{@phrase * @number.to_i}"
   end
 
   get '/say/:word1/:word2/:word3/:word4/:word5' do
@@ -21,7 +23,19 @@ class App < Sinatra::Base
   end
 
   get get '/:operation/:number1/:number2' do
-
+    @operation = params[:operation]
+    @number1 = params[:number1].to_i
+    @number2 = params[:number2].to_i
+    if @operation == "add"
+      answer = @number1 + @number2
+    elsif @operation == "substract"
+      answer = @number1 - @number2
+    elsif @operation == "multiply"
+      answer = @number1 * @number2
+    else @operation == "divide"
+      answer = @number1 / @number2
+      end 
+      "#{answer}"      
   end
 
 
